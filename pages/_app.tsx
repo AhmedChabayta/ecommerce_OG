@@ -13,13 +13,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <NoSSR>
       <div data-theme="black">
-        <CartProvider>
-          <RecoilRoot>
+        <RecoilRoot>
+          <CartProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </RecoilRoot>
-        </CartProvider>
+          </CartProvider>
+        </RecoilRoot>
       </div>
     </NoSSR>
   );

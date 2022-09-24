@@ -1,4 +1,6 @@
 import { StarIcon } from '@heroicons/react/24/solid';
+import { useRecoilState } from 'recoil';
+import sidebarState from '../atoms/sidebarState';
 import { useCart } from '../context/CartContext';
 import { ProductProps } from '../types/layout.types';
 
@@ -13,14 +15,15 @@ export default function ProductInfo({
   id,
   discountPercentage,
 }: ProductProps) {
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
-  } = useCart();
+  const [showSidebar, setShowSidebar] = useRecoilState(sidebarState);
+  const { getItemQuantity, increaseCartQuantity } = useCart();
 
   const quantity = getItemQuantity(id);
+
+  const handleAddToCart = (id: number) => {
+    increaseCartQuantity(id);
+    setShowSidebar(true);
+  };
   return (
     <>
       <div>
@@ -49,7 +52,7 @@ export default function ProductInfo({
           BUY AT {discountPercentage}% DISCOUNT{' '}
         </button>
         <button
-          onClick={() => increaseCartQuantity(id)}
+          onClick={() => handleAddToCart(id)}
           className="w-full py-3 rounded hover:scale-[1.2] active:scale-95 transition-all duration-100 "
           type="button"
         >

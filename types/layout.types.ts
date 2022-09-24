@@ -4,7 +4,7 @@ export interface LayoutProps {
   children: ReactNode;
 }
 
-export interface ProductProps {
+export type ProductProps = {
   id: number;
   title: string;
   description: string;
@@ -16,10 +16,12 @@ export interface ProductProps {
   category: string;
   thumbnail: string;
   images: string[];
-}
+  products: ProductProps;
+};
 
 export type ProductType = {
   product: ProductProps;
+  products: ProductProps;
 };
 
 export type ProductPageProps = {

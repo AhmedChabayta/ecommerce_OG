@@ -1,4 +1,5 @@
 import { useFocusTrap } from '@mantine/hooks';
+import { useRef } from 'react';
 import Account from '../components/Account';
 import Cart from '../components/Cart';
 
@@ -39,6 +40,9 @@ py-3
 `;
 export default function Sidebar() {
   const focusTrapRef = useFocusTrap();
+
+  const cartRef = useRef(null);
+  console.log(cartRef);
   return (
     <div ref={focusTrapRef} className={sidebarContainerStyle}>
       <div className={buttonContainerStyle}>
@@ -47,7 +51,7 @@ export default function Sidebar() {
         </button>
         <Account />
       </div>
-      <div className={buttonContainerStyle}>
+      <div ref={cartRef} className={buttonContainerStyle}>
         <button type="button" className={buttonStyle}>
           Cart
         </button>
