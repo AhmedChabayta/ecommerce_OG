@@ -1,51 +1,66 @@
+import {
+  hanger,
+  film,
+  music,
+  dumbell,
+  binoculars,
+  bolt,
+  bone,
+  crib,
+  fork,
+  hazard,
+  leaf,
+  wheel,
+} from './public/icons';
+
 const tabsData = [
   {
     name: 'Clothing & Shoes',
-    icon: 'hanger',
+    icon: hanger,
   },
   {
     name: 'Entertainment',
-    icon: 'film',
+    icon: film,
   },
   {
     name: 'Music',
-    icon: 'music',
+    icon: music,
   },
   {
     name: 'Sports & Lifestyle',
-    icon: 'dumbell',
+    icon: dumbell,
   },
   {
     name: 'Pets',
-    icon: 'bone',
+    icon: bone,
   },
   {
     name: 'Kitchen Accessories',
-    icon: 'fork',
+    icon: fork,
   },
   {
     name: 'Travel Equipment',
-    icon: 'binoculars',
+    icon: binoculars,
   },
   {
     name: 'Gardening',
-    icon: 'leaf',
+    icon: leaf,
   },
   {
     name: 'Tools',
-    icon: 'bolt',
+    icon: bolt,
   },
   {
     name: 'Mothers Love',
-    icon: 'crib',
+    icon: crib,
   },
   {
     name: 'Toys & Games',
-    icon: 'hazard',
+    icon: hazard,
   },
   {
     name: 'Classic',
-    icon: 'wheel',
+    icon: wheel,
   },
 ];
 

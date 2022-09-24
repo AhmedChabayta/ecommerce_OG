@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Relevence",
+    "options": [
+      "Price (Ascending)",
+      "Price (Descending)",
+      "Availability (Descending)",
+      "Availability (Ascending)"
+    ]
+  },
+  {
+    "name": "Condition",
+    "options": [
+      "New (Ascending)",
+      "New (Descending)",
+      "Refurbished (Descending)",
+      "Refurbished (Ascending)"
+    ]
+  },
+  {
+    "name": "Delivery Options",
+    "options": [
+      "Fast (Ascending)",
+      "Fast (Descending)",
+      "Slow (Descending)",
+      "Slow (Ascending)"
+    ]
+  }
+]
