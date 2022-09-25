@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 import { StarIcon } from '@heroicons/react/24/solid';
 import { useRecoilState } from 'recoil';
 import sidebarState from '../atoms/sidebarState';
@@ -16,9 +19,9 @@ export default function ProductInfo({
   discountPercentage,
 }: ProductProps) {
   const [showSidebar, setShowSidebar] = useRecoilState(sidebarState);
-  const { getItemQuantity, increaseCartQuantity } = useCart();
+  const { increaseCartQuantity } = useCart();
 
-  const quantity = getItemQuantity(id);
+  // const quantity = getItemQuantity(id);
 
   const handleAddToCart = (id: number) => {
     increaseCartQuantity(id);

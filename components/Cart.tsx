@@ -4,9 +4,14 @@ import { useCart } from '../context/CartContext';
 import formatCurrency from '../utilities/formatter';
 import CartItem from './CartItem';
 
+type I = {
+  id: number;
+};
+
 export default function Cart() {
   const { cartItems } = useCart();
-  const { products } = useRecoilValue(productsState);
+  const product = useRecoilValue(productsState);
+
   return (
     <div>
       {cartItems
@@ -19,7 +24,7 @@ export default function Cart() {
           {cartItems
             ? formatCurrency(
                 cartItems.reduce((total, cartItem) => {
-                  const item = products.find((i) => i.id === cartItem.id);
+                  const item = product.find((i: I) => i.id === cartItem.id);
                   return total + (item?.price || 0) * cartItem.quantity;
                 }, 0)
               )

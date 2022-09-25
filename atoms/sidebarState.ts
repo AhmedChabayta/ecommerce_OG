@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 const sidebarState = atom({
   key: 'sidebar',
-  default: false,
+  default: false as boolean,
 });
 
 export default sidebarState;

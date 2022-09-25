@@ -4,7 +4,7 @@ export interface LayoutProps {
   children: ReactNode;
 }
 
-export type ProductProps = {
+export interface ProductProps {
   id: number;
   title: string;
   description: string;
@@ -16,12 +16,12 @@ export type ProductProps = {
   category: string;
   thumbnail: string;
   images: string[];
-  products: ProductProps;
-};
+}
 
 export type ProductType = {
   product: ProductProps;
   products: ProductProps;
+  id: number;
 };
 
 export type ProductPageProps = {
@@ -39,5 +39,5 @@ export type ProductPageProps = {
 };
 
 export interface CurrentPostProps {
-  currentPost: ProductProps | void | any;
+  currentPost: ProductProps | void;
 }

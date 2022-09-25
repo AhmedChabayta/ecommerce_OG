@@ -15,8 +15,8 @@ export default function CartItem({ id, quantity }: CartProps) {
     useCart();
 
   const productState = useRecoilValue(productsState);
-  const { products } = productState;
-  const item = products.find((i: undefined | CartProps) => i?.id === id);
+
+  const item = productState.find((i: undefined | CartProps) => i?.id === id);
   if (item === null) return null;
 
   return (

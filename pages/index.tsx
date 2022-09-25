@@ -3,13 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-
 import {
   currentPageState,
   postsPerPageState,
   productsState,
 } from '../atoms/paginationState';
-
 import InputsRow from '../components/InputRow';
 import ProductInfo from '../components/ProductInfo';
 
@@ -24,7 +22,7 @@ const Home: NextPage = () => {
 
   // eslint-disable-next-line prettier/prettier
 
-  const { products }: any = productState;
+  const { products } = productState;
   const currentPost = products?.slice(indexOfFirstPost, indexOfLastPost);
 
   async function fetchProduct() {

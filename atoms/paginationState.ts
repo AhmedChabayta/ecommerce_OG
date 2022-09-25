@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { ProductProps } from '../types/layout.types';
 
 const { persistAtom } = recoilPersist();
 
@@ -18,5 +17,5 @@ export const postsPerPageState = atom({
 
 export const productsState = atom({
   key: 'productState',
-  default: null || ({} as ProductProps),
+  default: {} as any,
 });
