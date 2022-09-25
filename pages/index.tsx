@@ -10,6 +10,7 @@ import {
 } from '../atoms/paginationState';
 import InputsRow from '../components/InputRow';
 import ProductInfo from '../components/ProductInfo';
+import { ProductProps } from '../types/layout.types';
 
 const Home: NextPage = () => {
   const [productState, setProducts] = useRecoilState(productsState);
@@ -55,7 +56,7 @@ const Home: NextPage = () => {
         2xl:grid-cols-5
         `}
       >
-        {currentPost?.map((product: any) => (
+        {currentPost?.map((product: ProductProps) => (
           <div
             key={product?.title}
             className="grid grid-cols-1 grid-rows-2 h-[600px] w-full pt-2 px-2 rounded-xl border-2 border-gray-600/30 hover:border-gray-600/100 hover:scale-105 transition-transform duration-100 ease-linear"

@@ -1,6 +1,7 @@
-import { RefObject, useEffect, useRef } from 'react';
+import React, { RefObject, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 import sidebarState from '../atoms/sidebarState';
 import { LayoutProps } from '../types/layout.types';
 import Header from './Header';
@@ -9,17 +10,17 @@ import Sidebar from './Sidebar';
 export default function Layout({ children }: LayoutProps) {
   const [showSidebar, setShowSidebar] = useRecoilState(sidebarState);
 
-  const picker = useRef<HTMLElement>(null!);
+  const picker = useRef<HTMLElement>(null);
 
   function assertIsNode(e: EventTarget | null): asserts e is Node {
     if (!e || !('nodeType' in e)) {
       throw new Error('Node Expected');
     }
   }
-  const clickSidebar = (event: any) => {
-    if (event && event.key === 'ArrowLeft') {
+  const clickSidebar = (e: { key: string }) => {
+    if (e && e.key === 'ArrowLeft') {
       setShowSidebar(true);
-    } else if (event.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight') {
       setShowSidebar(false);
     }
   };
@@ -42,6 +43,16 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <>
+      <div className="fixed top-1 left-1 z-[500]">
+        {showSidebar ? (
+          ''
+        ) : (
+          <Bars3Icon
+            onClick={() => setShowSidebar(true)}
+            className="w-8 hover:stroke-green-500 cursor-pointer"
+          />
+        )}
+      </div>
       <div className="h-[30vh] min-h-[30vh]">
         <Header />
       </div>

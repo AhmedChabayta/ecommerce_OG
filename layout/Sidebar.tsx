@@ -16,15 +16,16 @@ overflow-y-scroll
 scrollbar-hide
 snap-y 
 snap-mandatory 
+border-l-2 
+border-gray-700
 shadow-xl
-shadow-gray-500
+shadow-gray-700
 transition-all
 duration-200
-
 `;
 
-const buttonContainerStyle = `
-min-h-full
+const sectionContainerStyle = `
+min-h-screen
 h-full
 snap-start
 relative
@@ -38,28 +39,25 @@ rounded-none
 text-2xl
 text-center
 w-full
-py-3
+
 `;
 export default function Sidebar() {
   const focusTrapRef = useFocusTrap();
 
   const cartRef = useRef(null);
-  console.log(cartRef);
   return (
     <div ref={focusTrapRef} className={sidebarContainerStyle}>
-      <div className={buttonContainerStyle}>
-        <button type="button" className={buttonStyle}>
-          Account
-        </button>
+      <div className={sectionContainerStyle}>
         <Account />
       </div>
-      <div ref={cartRef} className={buttonContainerStyle}>
-        <button type="button" className={buttonStyle}>
-          Cart
-        </button>
+      <div
+        style={{ paddingLeft: '10px', paddingTop: '10px' }}
+        ref={cartRef}
+        className={sectionContainerStyle}
+      >
         <Cart />
       </div>
-      <div className={buttonContainerStyle}>
+      <div className={sectionContainerStyle}>
         <button type="button" className={buttonStyle}>
           Departments
         </button>

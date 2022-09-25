@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { productsState } from '../atoms/paginationState';
 import { useCart } from '../context/CartContext';
@@ -9,9 +10,13 @@ type I = {
 };
 
 export default function Cart() {
-  const { cartItems } = useCart();
+  const { cartItems, cartQuantity } = useCart();
   const productState = useRecoilValue(productsState);
   const { products } = productState;
+
+  const CartItems = useMemo(() => cartItems, []);
+
+  const CartQuantity = useMemo(() => cartQuantity, []);
 
   return (
     <div>
@@ -22,7 +27,7 @@ export default function Cart() {
       <div className="absolute flex justify-between w-full bottom-2 px-2">
         <p>
           TOTAL:{' '}
-          {cartItems
+          {CartItems
             ? formatCurrency(
                 cartItems.reduce((total, cartItem) => {
                   const item = products.find((i: I) => i.id === cartItem.id);
@@ -31,6 +36,7 @@ export default function Cart() {
               )
             : 'loading'}
         </p>
+        {CartQuantity} ITEM(S)
         <button type="button">Checkout</button>
       </div>
     </div>

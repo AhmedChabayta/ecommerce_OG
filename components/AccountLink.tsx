@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 
 interface icons {
@@ -26,6 +25,7 @@ export default function AccountLink({ Icon, text, closedEnvelope }: icons) {
           <p className="">{text}</p>
         </div>
       )}
+      <hr className="min-w-screen" />
     </>
   );
 }

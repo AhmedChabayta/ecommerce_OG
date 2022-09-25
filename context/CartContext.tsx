@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import { createContext, ReactNode, useContext, useMemo } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 type CartProviderProps = {
@@ -55,33 +56,37 @@ export function CartProvider({ children }: CartProviderProps) {
     setCartItems((currItems) => {
       if (currItems.find((item) => item.id === id)?.quantity === 1) {
         return currItems.filter((item) => item.id !== id);
-      } else {
-        return currItems.map((item) => {
-          if (item.id === id) {
-            return { ...item, quantity: item.quantity - 1 };
-          } else {
-            return item;
-          }
-        });
       }
+      return currItems.map((item) => {
+        if (item.id === id) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      });
     });
   }
   function removeFromCart(id: number) {
     setCartItems((curItems) => curItems.filter((item) => item.id !== id));
   }
 
-  return (
-    <CartContext.Provider
-      value={{
-        getItemQuantity,
-        increaseCartQuantity,
-        decreaseCartQuantity,
-        removeFromCart,
-        cartItems,
-        cartQuantity,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
+  const memo = useMemo(
+    () => ({
+      getItemQuantity,
+      increaseCartQuantity,
+      decreaseCartQuantity,
+      removeFromCart,
+      cartItems,
+      cartQuantity,
+    }),
+    [
+      getItemQuantity,
+      increaseCartQuantity,
+      decreaseCartQuantity,
+      removeFromCart,
+      cartItems,
+      cartQuantity,
+    ]
   );
+
+  return <CartContext.Provider value={memo}>{children}</CartContext.Provider>;
 }
