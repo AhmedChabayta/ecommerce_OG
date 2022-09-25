@@ -7,7 +7,9 @@ const sidebarContainerStyle = `
 flex 
 flex-col 
 h-screen
-w-[30vw]
+w-screen
+md:w-[30vw]
+min-w-[400px]
 min-h-screen
 bg-black
 overflow-y-scroll 

@@ -44,6 +44,7 @@ const Home: NextPage = () => {
       {/* <Products currentPost={currentPost} /> */}
       <div
         className={`
+        px-6
         mt-10
         grid grid-flow-row
         w-full gap-2
@@ -51,7 +52,7 @@ const Home: NextPage = () => {
         sm:gird-cols-2
         md:grid-cols-2
         lg:grid-cols-3
-        xl:grid-cols-5
+        2xl:grid-cols-5
         `}
       >
         {currentPost?.map((product: any) => (
@@ -62,7 +63,7 @@ const Home: NextPage = () => {
             {' '}
             <Link href={`/product/${product.id}`}>
               <Image
-                objectFit="cover"
+                objectFit="contain"
                 height={300}
                 width={300}
                 src={product?.thumbnail}
