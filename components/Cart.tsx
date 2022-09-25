@@ -10,7 +10,8 @@ type I = {
 
 export default function Cart() {
   const { cartItems } = useCart();
-  const product = useRecoilValue(productsState);
+  const productState = useRecoilValue(productsState);
+  const { products } = productState;
 
   return (
     <div>
@@ -24,7 +25,7 @@ export default function Cart() {
           {cartItems
             ? formatCurrency(
                 cartItems.reduce((total, cartItem) => {
-                  const item = product.find((i: I) => i.id === cartItem.id);
+                  const item = products.find((i: I) => i.id === cartItem.id);
                   return total + (item?.price || 0) * cartItem.quantity;
                 }, 0)
               )
