@@ -7,7 +7,7 @@ const buttons = ['Show all', 'Auction', 'Buy now'];
 
 export default function InputsRow() {
   return (
-    <div className="flex flex-col items-center md:flex-row justify-between px-10 mt-10 lg:mt-0">
+    <div className="flex flex-col items-center md:flex-row justify-between lg:px-10 mt-20 lg:mt-10">
       <div className="self-center">
         {inputData.map(({ name, options }) => (
           <Input name={name} options={options} key={name} />

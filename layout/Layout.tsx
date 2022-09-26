@@ -75,7 +75,9 @@ export default function Layout({ children }: LayoutProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className={`${showSidebar ? 'hidden md:block' : ''}`}>
+      <div
+        className={`${showSidebar ? 'hidden md:block' : ''}`}
+      >
         {children}
       </div>
     </>

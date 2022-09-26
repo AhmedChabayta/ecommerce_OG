@@ -24,7 +24,7 @@ export default function Cart() {
         ? cartItems.map((item) => <CartItem key={item.id} {...item} />)
         : 'loading'}
       <div />
-      <div className="absolute flex justify-between w-full bottom-2 px-2">
+      <div className="absolute flex justify-between w-full bottom-2 px-2 pr-6">
         <p>
           TOTAL:{' '}
           {CartItems

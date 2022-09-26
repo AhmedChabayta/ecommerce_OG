@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
-import { StarIcon } from '@heroicons/react/24/solid';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import Image from 'next/image';
+import { ShoppingCartIcon } from '@heroicons/react/24/solid';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import sidebarState from '../../atoms/sidebarState';
+import { useCart } from '../../context/CartContext';
 import { ProductType } from '../../types/layout.types';
+import ProductDetails from './product_components/ProductDetails';
+import ProductImages from './product_components/ProductImages';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch('https://dummyjson.com/products');
@@ -32,56 +35,37 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default function Product({
-  product,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [selected, setSelected] = useState<string>(
-    product.images[0].toString()
-  );
-  return (
-    <div className="flex justify-evenly h-full space-x-8">
-      <div className="flex flex-col h-full space-x-2 space-y-4 w-[50vw]">
-        <Link href="/" passHref>
-          <p className="btn btn-primary w-fit active:bg-green-500">
-            Back to Browse
-          </p>
-        </Link>
-        <Image
-          height={400}
-          width={400}
-          objectFit="contain"
-          src={selected}
-          alt=""
-        />
-        <div className="flex">
-          {product.images.map((image: string) => (
-            <Image
-              key={image}
-              height={900}
-              width={900}
-              onClick={() => setSelected(image)}
-              objectFit="contain"
-              src={image}
-              alt=""
-            />
-          ))}
-        </div>
-      </div>
-      <div className="space-y-8 mt-10">
-        <h1 className="text-5xl font-black">{product.title}</h1>
-        <div className="flex space-x-2 items-center">
-          <p>{product.rating}</p>
-          <StarIcon className="w-5" />
-        </div>
-        <h2 className="text-3xl">{product.brand}</h2>
+export default function Product({ product }: ProductType) {
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+  const [showSidebar, setShowSidebar] = useRecoilState(sidebarState);
+  const { increaseCartQuantity, cartQuantity } = useCart();
+  const { id } = product;
 
-        <p>{product.description}</p>
-        <div className="flex space-x-2">
-          <h1 className="text-4xl font-black">${product.price}</h1>
-          <p>LIMITED TIME OFFER: %{product.discountPercentage}</p>
-        </div>
-      </div>
-      <p className="absolute bottom-0 right-4">{product.stock} LEFT IN STOCK</p>
+  // eslint-disable-next-line no-shadow
+  const handleAddToCart = (id: number) => {
+    increaseCartQuantity(id);
+    if (cartQuantity === 0) {
+      setShowSidebar(true);
+    }
+  };
+  return (
+    <div className="flex flex-col lg:flex-row justify-between relative w-screen pb-20 lg:pb-0">
+      <span className="absolute -top-10 left-2 ">
+        <Link href="/">
+          <button className="relative z-[100]" type="button">
+            Back to Browse
+          </button>
+        </Link>
+      </span>
+      <ProductImages {...product} />
+      <ProductDetails {...product} />
+      <button
+        onClick={() => handleAddToCart(id)}
+        type="button"
+        className="btn whitespace-nowrap absolute bottom-0 right-0 text-4xl space-x-2"
+      >
+        <p> ADD TO CART</p> <ShoppingCartIcon className="w-10" />
+      </button>
     </div>
   );
 }

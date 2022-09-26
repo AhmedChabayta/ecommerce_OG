@@ -3,7 +3,7 @@
 /* eslint-disable no-shadow */
 import { StarIcon } from '@heroicons/react/24/solid';
 import { useMemo } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import sidebarState from '../atoms/sidebarState';
 import { useCart } from '../context/CartContext';
 import { ProductProps } from '../types/layout.types';
@@ -22,12 +22,10 @@ export default function ProductInfo({
   const [showSidebar, setShowSidebar] = useRecoilState(sidebarState);
   const { increaseCartQuantity, cartQuantity } = useCart();
 
-  const increaseQ = useMemo(() => increaseCartQuantity, []);
-
   // const quantity = getItemQuantity(id);
 
   const handleAddToCart = (id: number) => {
-    increaseQ(id);
+    increaseCartQuantity(id);
     if (cartQuantity === 0) {
       setShowSidebar(true);
     }

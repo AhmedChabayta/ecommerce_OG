@@ -1,3 +1,5 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Logo from '../components/Logo';
@@ -51,8 +53,9 @@ focus:outline-none
 `;
 
 const tabsStyle = `
+relative
 flex 
-w-screen 
+smooth-scroll
 overflow-x-scroll 
 p-2 pr-8 mt-4
 scrollbar-hide 
@@ -68,14 +71,14 @@ space-y-2
 min-w-[200px] 
 py-2 
 rounded
-hover:bg-primary/70
-hover:text-black
 `;
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState<boolean>();
 
   const headerRef = useRef<HTMLDivElement>(null!);
+
+  const tabsRef = useRef<HTMLDivElement>(null!);
 
   const transitionNav = () => {
     if (window.scrollY > 400) {
@@ -94,8 +97,12 @@ export default function Header() {
       const entry = entries[0];
       setIsVisible(entry.isIntersecting);
     });
-    observer.observe(headerRef.current);
+    observer.observe(headerRef?.current);
   }, []);
+
+  const scroll = (scrollOffset: number) => {
+    tabsRef.current.scrollLeft += scrollOffset;
+  };
   return (
     <motion.div className={headerContainerStyle}>
       <motion.div
@@ -122,13 +129,30 @@ export default function Header() {
           </button>
         </div>
       </motion.div>
-      <div className={tabsStyle}>
-        {tabsData.map((tab) => (
-          <div className={tabStyle} key={tab.name}>
-            <img src={tab.icon.src} alt="" />
-            <p>{tab.name}</p>
-          </div>
-        ))}
+
+      <div className="scroll-smooth flex items-center w-screen">
+        <button
+          type="button"
+          onClick={() => scroll(1000)}
+          className="w-10 opacity-50 hover:opacity-100"
+        >
+          <ChevronRightIcon className="w-10" />
+        </button>
+        <div ref={tabsRef} className={tabsStyle}>
+          {tabsData.map((tab) => (
+            <div className={tabStyle} key={tab.name}>
+              <Image height={30} width={30} src={tab.icon.src} alt="" />
+              <p>{tab.name}</p>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => scroll(-1000)}
+          type="button"
+          className="w-10 opacity-50 hover:opacity-100"
+        >
+          <ChevronLeftIcon className="w-10" />
+        </button>
       </div>
     </motion.div>
   );

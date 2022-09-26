@@ -27,6 +27,7 @@ export default function CartItem({ id, quantity }: CartProps) {
     <div className="grid grid-flow-col grid-cols-3 w-full items-center relative">
       <div>
         <Image height={100} width={100} src={item?.thumbnail} alt="" />
+        <p>{item.title}</p>
       </div>
       <button
         type="button"
